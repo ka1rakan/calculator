@@ -11,22 +11,29 @@ let operator="";
 
 operators.forEach((op)=>{
     op.addEventListener("click",(e)=>{
-        if(operator==""){
-            operator = e.target.innerText;
-            mainOP.textContent += operator;
+        if(a=="ERROR"){
+            a="0";
+            operator=e.target.innerText;
+            mainOP.textContent = `${a} ${operator}`
         }else{
-            if(b=="0" || b==""){
-                operator=e.target.innerText;
-                mainOP.textContent = mainOP.textContent.slice(0,mainOP.textContent.length-1)
+            if(operator==""){
+                operator = e.target.innerText;
                 mainOP.textContent += operator;
             }else{
-                calculate(a,b,operator);
-                a=result;
-                b="";
-                operator=e.target.textContent;
-                mainOP.textContent= `${a} ${operator} `;
+                if(b=="0" || b==""){
+                    operator=e.target.innerText;
+                    mainOP.textContent = mainOP.textContent.slice(0,mainOP.textContent.length-1)
+                    mainOP.textContent += operator;
+                }else{
+                    calculate(a,b,operator);
+                    a=result;
+                    b="";
+                    operator=e.target.textContent;
+                    mainOP.textContent= `${a} ${operator} `;
+                }
             }
         }
+        
     })
 })
 
@@ -42,7 +49,7 @@ numbers.forEach((number)=>{
                 mainOP.textContent += e.target.innerText;
             }  
         }else{
-            if(a=="0"){
+            if(a=="0" || a=="ERROR"){
                 a = e.target.innerText; 
                 mainOP.textContent = e.target.innerText;
             }else if(a!="0"){
