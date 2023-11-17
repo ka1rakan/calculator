@@ -44,7 +44,7 @@
     height: 10vh;
 }
 
-.operator{
+.operator, .special{
     color:rgb(255, 103, 0);
 }
 

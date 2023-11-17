@@ -10,27 +10,44 @@ let operator="";
 operators.forEach((op)=>{
     op.addEventListener("click",(e)=>{
         operator = e.target.innerText;
+        displayP.textContent += operator;
     })
 })
 
 numbers.forEach((number)=>{
     number.addEventListener("click",(e)=>{
         if(operator){
-            b+= e.target.innerText;
+            if(b=="0"){
+                b = e.target.innerText;
+                displayP.textContent += e.target.innerText;
+            }else if(b!="0"){
+                b += e.target.innerText;
+                displayP.textContent += e.target.innerText;
+            }  
         }else{
-            a+= e.target.innerText
+            if(a=="0"){
+                a = e.target.innerText; 
+                displayP.textContent += e.target.innerText;
+            }else if(a!="0"){
+                a += e.target.innerText;
+                displayP.textContent += e.target.innerText;
+            }
         }
     })
 })
 
 let result;
-function operation(a,b,operator){
+function calculate(a,b,operator){
     a = Number(a);
     b = Number(b);
     if(operator=="%"){
        result = a%b 
     }else if(operator=="/"){
-        result = a/b
+        if(b==0){
+            result = "ERROR! You cannot divide with 0!"
+        }else{
+            result = a/b
+        }
     }else if(operator=="x"){
         result = a*b
     }else if(operator=="-"){
@@ -43,12 +60,12 @@ function operation(a,b,operator){
 specials.forEach((special)=>{
     special.addEventListener("click",(e)=>{
         if(e.target.innerText=="="){
-            console.log(a,b,operator)
-            operation(a,b,operator)
-            console.log(result)
-            a=0;
+            calculate(a,b,operator)
+            console.log(`${a} ${operator} ${b} = ${result}`)
+            a = result;
             b=0;
             operator="";
+            displayP.textContent=result;
         }
     })
 })
