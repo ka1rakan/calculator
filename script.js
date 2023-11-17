@@ -14,12 +14,16 @@ operators.forEach((op)=>{
             operator = e.target.innerText;
             mainOP.textContent += operator;
         }else{
-            if(b=="0"){
+            if(b=="0" || b==""){
                 operator=e.target.innerText;
                 mainOP.textContent = mainOP.textContent.slice(0,mainOP.textContent.length-1)
                 mainOP.textContent += operator;
             }else{
-                mainOP.textContent="ERROR"
+                calculate(a,b,operator);
+                a=result;
+                b="";
+                operator=e.target.textContent;
+                mainOP.textContent= `${a} ${operator} `;
             }
         }
     })
