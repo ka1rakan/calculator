@@ -91,6 +91,15 @@ specials.forEach((special)=>{
             }else{     
                 history.textContent=""
             }  
+        }else if(e.target.id=="delete"){
+            mainOP.textContent = mainOP.textContent.slice(0, mainOP.textContent.length-1);
+            if(a!=="" && operator==""){
+                a = a.slice(0,a.length-1)
+            }else if(operator!="" && b=="0" || b==""){
+                operator = "";
+            }else if(operator!="" && b!="0" || b!=""){
+                b = b.slice(0,b.length-1)
+            }
         }
     })
 })
