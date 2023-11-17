@@ -77,8 +77,8 @@ specials.forEach((special)=>{
         if(e.target.innerText=="="){
             calculate(a,b,operator)
             history.textContent = `${a} ${operator} ${b}`
-            a = result;
-            b=0;
+            a = String(result);
+            b="0";
             operator="";
             mainOP.textContent=result;
         }else if(e.target.id=="clear"){
