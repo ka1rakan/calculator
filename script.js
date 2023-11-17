@@ -82,12 +82,17 @@ function calculate(a,b,operator){
 specials.forEach((special)=>{
     special.addEventListener("click",(e)=>{
         if(e.target.innerText=="="){
-            calculate(a,b,operator)
-            history.textContent = `${a} ${operator} ${b}`
-            a = String(result);
-            b="0";
-            operator="";
-            mainOP.textContent=result;
+            if(b=="0"){
+                mainOP.textContent = a;
+                history.textContent = a;
+            }else{
+                calculate(a,b,operator)
+                history.textContent = `${a} ${operator} ${b}`
+                a = String(result);
+                b="0";
+                operator="";
+                mainOP.textContent=result;
+            }
         }else if(e.target.id=="clear"){
             if(mainOP.textContent!=="0"){
                 a="0";
