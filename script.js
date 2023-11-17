@@ -3,6 +3,7 @@ const operators = document.querySelectorAll(".operator");
 const specials = document.querySelectorAll(".special");
 const mainOP = document.querySelector(".main-operation");
 const history = document.querySelector(".history");
+const clear = document.querySelector("#clear");
 
 let a="0";
 let b="0";
@@ -31,6 +32,7 @@ operators.forEach((op)=>{
 
 numbers.forEach((number)=>{
     number.addEventListener("click",(e)=>{
+        clear.textContent="C"
         if(operator){
             if(b=="0"){
                 b = e.target.innerText;
@@ -74,16 +76,21 @@ specials.forEach((special)=>{
     special.addEventListener("click",(e)=>{
         if(e.target.innerText=="="){
             calculate(a,b,operator)
-            history.textContent = `${a} ${operator} ${b} = ${result}`
+            history.textContent = `${a} ${operator} ${b}`
             a = result;
             b=0;
             operator="";
             mainOP.textContent=result;
-        }else if(e.target.innerText=="C"){
-            a="0";
-            b="";
-            operator="";
-            mainOP.textContent = a;
+        }else if(e.target.id=="clear"){
+            if(mainOP.textContent!=="0"){
+                a="0";
+                b="";
+                operator="";
+                mainOP.textContent = a;
+                clear.textContent="AC"
+            }else{     
+                history.textContent=""
+            }  
         }
     })
 })
