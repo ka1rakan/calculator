@@ -51,11 +51,9 @@ let result;
 function calculate(a,b,operator){
     a = Number(a);
     b = Number(b);
-    if(operator=="%"){
-       result = a%b 
-    }else if(operator=="/"){
+    if(operator=="/"){
         if(b==0){
-            result = "ERROR! You cannot divide with 0!"
+            result = "ERROR"
         }else{
             result = a/b
         }
@@ -72,7 +70,7 @@ specials.forEach((special)=>{
     special.addEventListener("click",(e)=>{
         if(e.target.innerText=="="){
             calculate(a,b,operator)
-            console.log(`${a} ${operator} ${b} = ${result}`)
+            history.textContent = `${a} ${operator} ${b} = ${result}`
             a = result;
             b=0;
             operator="";
