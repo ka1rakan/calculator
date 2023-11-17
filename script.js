@@ -1,16 +1,27 @@
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const specials = document.querySelectorAll(".special");
-const displayP = document.querySelector(".display p");
+const mainOP = document.querySelector(".main-operation");
+const history = document.querySelector(".history");
 
-let a=0;
-let b=0;
+let a="0";
+let b="0";
 let operator="";
 
 operators.forEach((op)=>{
     op.addEventListener("click",(e)=>{
-        operator = e.target.innerText;
-        displayP.textContent += operator;
+        if(operator==""){
+            operator = e.target.innerText;
+            mainOP.textContent += operator;
+        }else{
+            if(b=="0"){
+                operator=e.target.innerText;
+                mainOP.textContent = mainOP.textContent.slice(0,mainOP.textContent.length-1)
+                mainOP.textContent += operator;
+            }else{
+                mainOP.textContent="ERROR"
+            }
+        }
     })
 })
 
@@ -19,18 +30,18 @@ numbers.forEach((number)=>{
         if(operator){
             if(b=="0"){
                 b = e.target.innerText;
-                displayP.textContent += e.target.innerText;
+                mainOP.textContent += e.target.innerText;
             }else if(b!="0"){
                 b += e.target.innerText;
-                displayP.textContent += e.target.innerText;
+                mainOP.textContent += e.target.innerText;
             }  
         }else{
             if(a=="0"){
                 a = e.target.innerText; 
-                displayP.textContent += e.target.innerText;
+                mainOP.textContent = e.target.innerText;
             }else if(a!="0"){
                 a += e.target.innerText;
-                displayP.textContent += e.target.innerText;
+                mainOP.textContent += e.target.innerText;
             }
         }
     })
@@ -65,7 +76,12 @@ specials.forEach((special)=>{
             a = result;
             b=0;
             operator="";
-            displayP.textContent=result;
+            mainOP.textContent=result;
+        }else if(e.target.innerText=="C"){
+            a="0";
+            b="";
+            operator="";
+            mainOP.textContent = a;
         }
     })
 })
