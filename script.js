@@ -18,7 +18,7 @@ operators.forEach((op)=>{
         }else{
             if(operator==""){
                 operator = e.target.innerText;
-                mainOP.textContent += operator;
+                mainOP.textContent += ` ${operator} `;
             }else{
                 if(b=="0" || b==""){
                     operator=e.target.innerText;
@@ -64,7 +64,7 @@ let result;
 function calculate(a,b,operator){
     a = Number(a);
     b = Number(b);
-    if(operator=="/"){
+    if(operator=="÷"){
         if(b==0){
             result = "ERROR"
         }else{
